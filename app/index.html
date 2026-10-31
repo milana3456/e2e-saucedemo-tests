@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+</head>
+<body>
+    <h1>Мой список задач</h1>
+    <input type="text" id="task-input" placeholder="Новая задача...">
+    <button id="add-btn">Добавить</button>
+    <ul id="task-list"></ul>
+
+    <script>
+        document.getElementById('add-btn').addEventListener('click', function() {
+            const input = document.getElementById('task-input');
+            const text = input.value.trim();
+            if (text === '') return;
+
+            const li = document.createElement('li');
+            li.className = 'task-item';
+            li.innerHTML = `<span class="task-text">${text}</span>
+                            <button class="delete-btn">Удалить</button>`;
+
+            // Отметка о выполнении
+            li.querySelector('.task-text').addEventListener('click', function() {
+                li.classList.toggle('completed');
+            });
+
+            // Удаление
+            li.querySelector('.delete-btn').addEventListener('click', function() {
+                li.remove();
+            });
+
+            document.getElementById('task-list').appendChild(li);
+            input.value = '';
+        });
+    </script>
+</body>
+</html>
